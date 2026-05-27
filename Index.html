@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolución de la Didáctica</title>
+    <!-- Fuentes modernas y legibles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Iconos vectoriales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Paleta de colores profesionales y modernos para cada etapa */
+            --color-1: #3b82f6; /* Azul brillante */
+            --color-2: #f59e0b; /* Ámbar */
+            --color-3: #10b981; /* Esmeralda */
+            --color-4: #ef4444; /* Rojo carmesí */
+            --color-5: #8b5cf6; /* Púrpura */
+            --color-6: #14b8a6; /* Verde azulado (Teal) */
+            --color-7: #ec4899; /* Rosa vibrante */
+            --color-8: #f97316; /* Naranja */
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Marca de agua profesional fija en el fondo */
+        body::before {
+            content: 'DIDÁCTICA \2022 PEDAGOGÍA \2022 INNOVACIÓN \2022 APRENDIZAJE \2022';
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            font-size: 8vw;
+            font-weight: 800;
+            color: rgba(15, 23, 42, 0.03); /* Muy sutil */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+            z-index: -1;
+            pointer-events: none;
+            transform: rotate(-15deg) scale(1.5);
+        }
+
+        /* Encabezado Principal */
+        .header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .author-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Contenedor de la Línea de Tiempo */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* La línea central vertical */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #cbd5e1;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+        /* Contenedor de cada nodo */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            z-index: 2;
+        }
+
+        /* Alternar lados */
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+
+        /* El punto/icono en la línea central */
+        .timeline-dot {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            right: -25px;
+            background-color: white;
+            border: 5px solid; /* El color se asigna por clase */
+            border-radius: 50%;
+            top: 25px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .right .timeline-dot {
+            left: -25px;
+        }
+
+        /* La Tarjeta de Contenido */
+        .timeline-content {
+            padding: 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 8px solid; /* El color se asigna por clase */
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        /* Fechas y Títulos */
+        .timeline-date {
+            display: inline-block;
+            padding: 6px 15px;
+            background-color: #f1f5f9;
+            color: #334155;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .timeline-authors {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 1rem;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        /* Caja de Relevancia */
+        .relevance-box {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid; /* El color se asigna por clase */
+            font-size: 0.95rem;
+        }
+
+        .relevance-box strong {
+            display: block;
+            color: #0f172a;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ASIGNACIÓN DE COLORES DINÁMICOS */
+        /* Nodo 1 */
+        .theme-1 .timeline-dot { border-color: var(--color-1); color: var(--color-1); }
+        .theme-1 .timeline-content { border-top-color: var(--color-1); }
+        .theme-1 .relevance-box { border-left-color: var(--color-1); }
+        /* Nodo 2 */
+        .theme-2 .timeline-dot { border-color: var(--color-2); color: var(--color-2); }
+        .theme-2 .timeline-content { border-top-color: var(--color-2); }
+        .theme-2 .relevance-box { border-left-color: var(--color-2); }
+        /* Nodo 3 */
+        .theme-3 .timeline-dot { border-color: var(--color-3); color: var(--color-3); }
+        .theme-3 .timeline-content { border-top-color: var(--color-3); }
+        .theme-3 .relevance-box { border-left-color: var(--color-3); }
+        /* Nodo 4 */
+        .theme-4 .timeline-dot { border-color: var(--color-4); color: var(--color-4); }
+        .theme-4 .timeline-content { border-top-color: var(--color-4); }
+        .theme-4 .relevance-box { border-left-color: var(--color-4); }
+        /* Nodo 5 */
+        .theme-5 .timeline-dot { border-color: var(--color-5); color: var(--color-5); }
+        .theme-5 .timeline-content { border-top-color: var(--color-5); }
+        .theme-5 .relevance-box { border-left-color: var(--color-5); }
+        /* Nodo 6 */
+        .theme-6 .timeline-dot { border-color: var(--color-6); color: var(--color-6); }
+        .theme-6 .timeline-content { border-top-color: var(--color-6); }
+        .theme-6 .relevance-box { border-left-color: var(--color-6); }
+        /* Nodo 7 */
+        .theme-7 .timeline-dot { border-color: var(--color-7); color: var(--color-7); }
+        .theme-7 .timeline-content { border-top-color: var(--color-7); }
+        .theme-7 .relevance-box { border-left-color: var(--color-7); }
+        /* Nodo 8 */
+        .theme-8 .timeline-dot { border-color: var(--color-8); color: var(--color-8); }
+        .theme-8 .timeline-content { border-top-color: var(--color-8); }
+        .theme-8 .relevance-box { border-left-color: var(--color-8); }
+
+        /* DISEÑO RESPONSIVO (MÓVILES Y TABLETS) */
+        @media screen and (max-width: 900px) {
+            .header h1 { font-size: 2.5rem; }
+            .timeline::after { left: 40px; }
+            .timeline-item { width: 100%; padding-left: 90px; padding-right: 20px; }
+            .timeline-item.right { left: 0; }
+            .timeline-dot { left: 15px !important; right: auto !important; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header h1 { font-size: 2rem; }
+            .timeline-item { padding-left: 70px; padding-right: 10px; }
+            .timeline-dot { left: 15px !important; width: 40px; height: 40px; font-size: 1rem; top: 30px;}
+            .timeline::after { left: 35px; }
+            .timeline-content { padding: 20px; }
+            .timeline-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Evolución de la Didáctica</h1>
+        <h2>De los orígenes a la era contemporánea</h2>
+        <div class="author-badge">
+            <i class="fa-solid fa-user-pen" style="margin-right: 8px;"></i> Autora: Domitila Abrego
+        </div>
+    </header>
+
+    <div class="timeline">
+        
+        <!-- Nodo 1 -->
+        <div class="timeline-item left theme-1">
+            <div class="timeline-dot"><i class="fa-solid fa-landmark"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> Antigüedad Clásica</div>
+                <h3 class="timeline-title">Enfoque Reflexivo y Ético</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Sócrates, Platón, Aristóteles</div>
+                <p class="timeline-desc">Promovieron el cuestionamiento, la formación ética y el desarrollo integral del ser humano, contrastando con la pedagogía memorística de la época.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Sentaron las bases filosóficas del pensamiento crítico y la concepción de la educación como autodescubrimiento.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 2 -->
+        <div class="timeline-item right theme-2">
+            <div class="timeline-dot"><i class="fa-solid fa-book-open"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> Siglos XVII al XIX</div>
+                <h3 class="timeline-title">Paradigma Tradicional</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Pensadores de la Ilustración</div>
+                <p class="timeline-desc">Transmisión de conocimientos desde el docente hacia un alumno pasivo; currículo enciclopédico y enseñanza frontal basada en memorización y disciplina.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Contribuyó históricamente a la universalización de la educación escolar y al desarrollo de sistemas organizados.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 3 -->
+        <div class="timeline-item left theme-3">
+            <div class="timeline-dot"><i class="fa-solid fa-gears"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> Inicios S.XX - 1960</div>
+                <h3 class="timeline-title">Paradigma Conductista</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Watson, Pavlov, Skinner</div>
+                <p class="timeline-desc">Define el aprendizaje como un cambio de conducta observable condicionado por estímulos externos. Emplea reforzadores positivos y objetivos claros.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Mantiene gran vigencia en el diseño de sistemas de aprendizaje asistido por tecnología y la enseñanza de habilidades mecánicas.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 4 -->
+        <div class="timeline-item right theme-4">
+            <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> 1950 - 1970</div>
+                <h3 class="timeline-title">Paradigma Cognitivista</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Ciencias Cognitivas</div>
+                <p class="timeline-desc">Entiende el aprendizaje como un proceso mental interno de procesamiento de la información (codificación, almacenamiento y recuperación).</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Aportó bases vitales para la neurodidáctica, desarrollando herramientas centradas en estrategias metacognitivas.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 5 -->
+        <div class="timeline-item left theme-5">
+            <div class="timeline-dot"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> 1970 - 1990</div>
+                <h3 class="timeline-title">Paradigma Constructivista</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Piaget, Vygotsky, Ausubel</div>
+                <p class="timeline-desc">El estudiante construye activamente el conocimiento mediante la interacción social y saberes previos. Introduce el andamiaje y la evaluación formativa.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Es el marco ideal para el rediseño curricular basado en competencias y el Aprendizaje Basado en Proyectos (ABP).
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 6 -->
+        <div class="timeline-item right theme-6">
+            <div class="timeline-dot"><i class="fa-solid fa-users-rays"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> 1970 - Presente</div>
+                <h3 class="timeline-title">Paradigma Sociocrítico</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Freire, Giroux, McLaren</div>
+                <p class="timeline-desc">Concibe la educación como herramienta ética y política de transformación social. Promueve la reflexión vinculada a la acción y la horizontalidad.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Fundamental para las metodologías de investigación-acción, proyectos comunitarios y la educación para la ciudadanía.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 7 -->
+        <div class="timeline-item left theme-7">
+            <div class="timeline-dot"><i class="fa-solid fa-heart-circle-check"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> 1960 - Presente</div>
+                <h3 class="timeline-title">Paradigma Humanista</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> Rogers, Maslow, Frankl</div>
+                <p class="timeline-desc">Centrado en el estudiante, valora su desarrollo emocional, ético y personal. La relación pedagógica se basa en la empatía, el acompañamiento y el respeto.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Es la base de la educación socioemocional, el bienestar integral y las pedagogías del cuidado frente a los retos de salud mental.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nodo 8 -->
+        <div class="timeline-item right theme-8">
+            <div class="timeline-dot"><i class="fa-solid fa-network-wired"></i></div>
+            <div class="timeline-content">
+                <div class="timeline-date"><i class="fa-regular fa-clock"></i> 2000 - Presente</div>
+                <h3 class="timeline-title">Paradigma Conectivista</h3>
+                <div class="timeline-authors"><i class="fa-solid fa-users"></i> George Siemens, Stephen Downes</div>
+                <p class="timeline-desc">El conocimiento está distribuido en redes digitales y el aprendizaje ocurre al conectarse a ellas. Requiere de gran autonomía y habilidades de filtrado.</p>
+                <div class="relevance-box">
+                    <strong>Relevancia actual:</strong>
+                    Define la educación en la sociedad actual, impulsando "didácticas transmedia" que superan definitivamente los límites del aula física.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
